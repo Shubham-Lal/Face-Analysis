@@ -1,6 +1,6 @@
-import React from 'react'
+import './style.css'
 
-const Details = () => {
+const Details = ({ image }) => {
   return (
     <div>Details</div>
   )
