@@ -5,10 +5,14 @@
 }
 
 body {
+  max-width: 1920px;
+  width: 100%;
+  margin: 0 auto;
   background-color: #010101;
   color: #ffffff;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button {

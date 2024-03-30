@@ -38,6 +38,14 @@
     cursor: grab;
 }
 
+#image .capture-btn.upload {
+    cursor: pointer;
+}
+
+#image .capture-btn.proceed {
+    cursor: pointer;
+}
+
 #image .upload-btn {
     padding: 7.5px 20px;
     display: flex;
