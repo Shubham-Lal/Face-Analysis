@@ -45,13 +45,18 @@ const Home = ({ image, setImage }) => {
         const canvas = document.createElement('canvas');
         canvas.width = webcamRef.current.videoWidth;
         canvas.height = webcamRef.current.videoHeight;
+
         const context = canvas.getContext('2d');
         context.drawImage(webcamRef.current, 0, 0);
+
         const imageData = canvas.toDataURL('image/png');
         setImage(imageData);
+
         setAction('capture');
         setCapturing(false);
         stopWebcam();
+
+        new Audio('/shutter.mp3').play();
     };
 
     const selectImage = (event) => {
@@ -71,17 +76,30 @@ const Home = ({ image, setImage }) => {
 
     return (
         <div id='image'>
-            <div className='instruction__component'>
-                <h2>Upload an Image</h2>
-                <h3>or</h3>
-                <h2>Allow access to capture Image</h2>
-            </div>
+            {(permissionState === 'denied' || !image) && (
+                <div className='instruction__component'>
+                    <h2>Upload an Image</h2>
+                    <h3
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '10px'
+                        }}
+                    >
+                        <div style={{ width: '100px', height: '2px', backgroundColor: '#212122' }} />
+                        or
+                        <div style={{ width: '100px', height: '2px', backgroundColor: '#212122' }} />
+                    </h3>
+                    <h2>Allow access to capture Image</h2>
+                </div>
+            )}
 
             {capturing && (
                 <div className='webcam__container' >
                     <video ref={webcamRef} autoPlay playsInline />
                 </div>
             )}
+
             {image && (
                 <div className='image__container'>
                     <img src={image} alt='Captured' />
@@ -97,6 +115,7 @@ const Home = ({ image, setImage }) => {
                     ref={imageRef}
                     type='file'
                     accept='image/*'
+                    multiple={false}
                     onChange={selectImage}
                     hidden
                 />
@@ -105,9 +124,9 @@ const Home = ({ image, setImage }) => {
                     onClick={() => imageRef?.current.click()}
                 >
                     {image && action === 'upload' ? (
-                        <BsArrowRepeat size={30} />
+                        <BsArrowRepeat size={25} />
                     ) : (
-                        <TbPhoto size={30} />
+                        <TbPhoto size={25} />
                     )}
                 </button>
                 {permissionState !== 'pending' && permissionState !== 'denied' && (
@@ -122,9 +141,9 @@ const Home = ({ image, setImage }) => {
                         }}
                     >
                         {image && action === 'capture' ? (
-                            <BsArrowRepeat size={30} />
+                            <BsArrowRepeat size={25} />
                         ) : (
-                            <MdMotionPhotosOn size={30} />
+                            <MdMotionPhotosOn size={25} />
                         )}
                     </button>
                 )}
@@ -133,7 +152,7 @@ const Home = ({ image, setImage }) => {
                         to='/details'
                         className='capture-btn proceed'
                     >
-                        <GiCheckMark size={25} />
+                        <GiCheckMark size={20} />
                     </Link>
                 )}
             </div>
