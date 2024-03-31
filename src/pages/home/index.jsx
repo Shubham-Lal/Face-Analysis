@@ -1,5 +1,5 @@
 import './style.css'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import { TbPhoto } from 'react-icons/tb'
 import { BsArrowRepeat } from 'react-icons/bs'
 import { MdMotionPhotosOn } from 'react-icons/md'
@@ -7,13 +7,14 @@ import { GiCheckMark } from 'react-icons/gi'
 import { Link } from 'react-router-dom'
 import { toast } from 'sonner'
 
-const Home = ({ image, setImage }) => {
+const Home = ({
+    permissionState, setPermissionState,
+    capturing, setCapturing,
+    image, setImage,
+    action, setAction
+}) => {
     const webcamRef = useRef(null);
     const imageRef = useRef(null);
-
-    const [permissionState, setPermissionState] = useState('pending');
-    const [capturing, setCapturing] = useState(true);
-    const [action, setAction] = useState('');
 
     useEffect(() => {
         if (capturing) {
@@ -76,7 +77,7 @@ const Home = ({ image, setImage }) => {
 
     return (
         <div id='image'>
-            {(permissionState === 'denied' || !image) && (
+            {!image && (
                 <div className='instruction__component'>
                     <h2>Upload an Image</h2>
                     <h3

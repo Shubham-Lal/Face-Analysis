@@ -1,0 +1,45 @@
+.canvas-img {
+    max-width: 100%;
+    max-height: 80vh;
+    margin: 0 auto;
+    display: block;
+    border-left: 2px solid #212122;
+    border-bottom: 2px solid #212122;
+    border-right: 2px solid #212122;
+}
+
+.go-back-link {
+    margin: 0 auto;
+    width: fit-content;
+    display: block;
+    color: #2b99d6;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.go-back-link:hover {
+    text-decoration: underline;
+}
+
+#details {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+}
+
+.face-details h2,
+.face-expression h2 {
+    margin-bottom: 10px;
+}
+
+.face-details p,
+.face-expression p {
+    margin: 5px 0;
+}
+
+@media screen and (max-width: 480px) {
+    #details {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}

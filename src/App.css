@@ -18,3 +18,18 @@ body {
 button {
   cursor: pointer;
 }
+
+#loading {
+  height: calc(100vh - 77px);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+@media screen and (max-width: 480px) {
+  #loading {
+    height: calc(100vh - 52px);
+  }
+}
