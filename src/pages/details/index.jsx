@@ -1,7 +1,7 @@
-import './style.css';
-import React, { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import * as faceApi from 'face-api.js';
+import './style.css'
+import React, { useEffect, useState, useRef } from 'react'
+import { Link } from 'react-router-dom'
+import * as faceApi from 'face-api.js'
 
 const Details = ({ image }) => {
   const canvasRef = useRef(null);
@@ -79,7 +79,7 @@ const Details = ({ image }) => {
         </div>
       ) : (
         <>
-          <Link to='/' className='go-back-link'>New Image</Link>
+          <Link to='/' className='go-back-link'>Upload new Image</Link>
           <div id='details-wrapper'>
             {faceDetails && (
               <div className='face-analyze'>
@@ -94,7 +94,7 @@ const Details = ({ image }) => {
               <div className='face-analyze'>
                 <h2>Expression</h2>
                 {Object.entries(expression).map(([key, value]) => (
-                  <p key={key}>{key}: {value.toFixed(10)}</p>
+                  <p key={key}>{key.charAt(0).toUpperCase() + key.slice(1)}: {value.toFixed(5)}</p>
                 ))}
               </div>
             )}

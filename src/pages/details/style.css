@@ -40,6 +40,12 @@
     margin: 5px 0;
 }
 
+@media screen and (max-width: 1280px) {
+    #details-wrapper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
 @media screen and (max-width: 480px) {
     #details-container {
         margin-top: 52px;

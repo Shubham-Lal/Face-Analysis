@@ -1,16 +1,18 @@
-import './App.css';
-import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import * as faceApi from 'face-api.js';
-import Home from './pages/home';
-import Details from './pages/details';
+import './App.css'
+import { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import * as faceApi from 'face-api.js'
+import Home from './pages/home'
+import Details from './pages/details'
 
 async function loadModels() {
-  await faceApi.nets.ssdMobilenetv1.loadFromUri('/models');
-  await faceApi.nets.faceLandmark68Net.loadFromUri('/models');
-  await faceApi.nets.faceExpressionNet.loadFromUri('/models');
-  await faceApi.nets.tinyFaceDetector.loadFromUri('/models');
-  await faceApi.nets.ageGenderNet.loadFromUri('/models');
+  await Promise.all([
+    faceApi.nets.ssdMobilenetv1.loadFromUri('/models'),
+    faceApi.nets.faceLandmark68Net.loadFromUri('/models'),
+    faceApi.nets.faceExpressionNet.loadFromUri('/models'),
+    faceApi.nets.tinyFaceDetector.loadFromUri('/models'),
+    faceApi.nets.ageGenderNet.loadFromUri('/models')
+  ]);
 }
 
 function App() {
