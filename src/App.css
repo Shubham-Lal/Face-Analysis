@@ -20,7 +20,7 @@ button {
 }
 
 #loading {
-  height: calc(100vh - 77px);
+  height: calc(100dvh - 77px);
   display: flex;
   flex-direction: column;
   gap: 5px;
@@ -30,6 +30,6 @@ button {
 
 @media screen and (max-width: 480px) {
   #loading {
-    height: calc(100vh - 52px);
+    height: calc(100dvh - 52px);
   }
 }

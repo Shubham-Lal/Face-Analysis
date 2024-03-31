@@ -10,6 +10,7 @@ async function loadModels() {
   await faceApi.nets.faceLandmark68Net.loadFromUri('/models');
   await faceApi.nets.faceExpressionNet.loadFromUri('/models');
   await faceApi.nets.tinyFaceDetector.loadFromUri('/models');
+  await faceApi.nets.ageGenderNet.loadFromUri('/models');
 }
 
 function App() {

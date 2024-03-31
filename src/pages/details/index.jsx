@@ -25,7 +25,7 @@ const Details = ({ image }) => {
           context.drawImage(img, 0, 0, img.width, img.height);
 
           try {
-            const detections = await faceApi.detectAllFaces(canvas, new faceApi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
+            const detections = await faceApi.detectAllFaces(canvas, new faceApi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions().withAgeAndGender();
             if (detections.length > 0) {
               const face = detections[0];
               if (face.detection && face.detection.box) {
@@ -35,7 +35,7 @@ const Details = ({ image }) => {
                 const heightInCm = height * 0.0264583;
                 const expression = face.expressions;
 
-                setFaceDetails({ width: widthInCm, height: heightInCm });
+                setFaceDetails({ width: widthInCm, height: heightInCm, age: face.age, gender: face.gender });
                 setExpression(expression);
 
                 faceApi.draw.drawFaceLandmarks(canvas, detections);
@@ -65,7 +65,7 @@ const Details = ({ image }) => {
     </div>
   }
   return (
-    <>
+    <div id='details-container'>
       <canvas
         ref={canvasRef}
         className='canvas-img'
@@ -80,26 +80,28 @@ const Details = ({ image }) => {
       ) : (
         <>
           <Link to='/' className='go-back-link'>New Image</Link>
-          <div id='details'>
+          <div id='details-wrapper'>
             {faceDetails && (
-              <div className='face-details'>
+              <div className='face-analyze'>
                 <h2>Face Details</h2>
-                <p>Face Width: {faceDetails.width.toFixed(2)} cm</p>
-                <p>Face Height: {faceDetails.height.toFixed(2)} cm</p>
+                <p>Width: {faceDetails.width.toFixed(2)} cm</p>
+                <p>Height: {faceDetails.height.toFixed(2)} cm</p>
+                <p>Age: {faceDetails.age.toFixed(0)}</p>
+                <p>Gender: {faceDetails.gender.charAt(0).toUpperCase() + faceDetails.gender.slice(1)}</p>
               </div>
             )}
             {expression && (
-              <div className='face-expression'>
+              <div className='face-analyze'>
                 <h2>Expression</h2>
                 {Object.entries(expression).map(([key, value]) => (
-                  <p key={key}>{key}: {value.toFixed(2)}</p>
+                  <p key={key}>{key}: {value.toFixed(10)}</p>
                 ))}
               </div>
             )}
           </div>
         </>
       )}
-    </>
+    </div>
   );
 };
 

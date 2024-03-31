@@ -1,3 +1,7 @@
+#details-container {
+    margin-top: 77px;
+}
+
 .canvas-img {
     max-width: 100%;
     max-height: 80vh;
@@ -21,25 +25,27 @@
     text-decoration: underline;
 }
 
-#details {
+#details-wrapper {
     padding: 20px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
 }
 
-.face-details h2,
-.face-expression h2 {
-    margin-bottom: 10px;
+.face-analyze h2 {
+    text-decoration: underline;
 }
 
-.face-details p,
-.face-expression p {
+.face-analyze p {
     margin: 5px 0;
 }
 
 @media screen and (max-width: 480px) {
-    #details {
+    #details-container {
+        margin-top: 52px;
+    }
+
+    #details-wrapper {
         grid-template-columns: repeat(1, 1fr);
     }
 }
